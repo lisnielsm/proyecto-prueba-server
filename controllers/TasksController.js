@@ -1,16 +1,16 @@
 const Task = require('../models/Task');
-const { validationResult } = require('express-validator');
 
 exports.createTask = async (req, res) => {
     
-    // check for errors
-    const errors = validationResult(req);
-
-    if(!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-
     try {
+
+        // check for errors
+        const { text } = req.body;
+
+        if(!text || text.trim() === '') {
+            return res.status(400).json({ msg: "Text must be not empty" });
+        }
+
         // create a new task
         const task = new Task(req.body);
 
@@ -36,12 +36,6 @@ exports.getTasks = async (req, res) => {
 }
 
 exports.updateTask = async (req, res) => {
-    // check for errors
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
 
     // get the text from task
     const { text } = req.body;
@@ -49,6 +43,8 @@ exports.updateTask = async (req, res) => {
 
     if(text) {
         newTask.text = text;
+    } else {
+        return res.status(400).json({ msg: "Text must be not empty" });
     }
 
     try {
