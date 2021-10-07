@@ -13,8 +13,9 @@
     "dotenv": "^10.0.0",
     "env": "^0.0.2",
     "express": "^4.17.1",
-    "express-validator": "^6.12.2",
-    "mongoose": "^6.0.9"
+    "express-validator": "^2.11.0",
+    "mongoose": "^6.0.9",
+    "npm": "^7.24.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.13"
